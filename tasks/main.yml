@@ -24,23 +24,27 @@
       - curl
       - software-properties-common
 
-- name: Pin the installed version of docker
+- name: Pin the installed version of docker-ce
   copy:
     dest: /etc/apt/preferences.d/docker-ce
     content: |
-      Package: "{{packages}}"
+      Package: docker-ce
       Pin: version {{ version_docker }}
       Pin-Priority: 1002
-  vars:
-    packages:
-      - docker-ce
-      - docker-ce-cli
+
+- name: Pin the installed version of docker-ce-cli
+  copy:
+    dest: /etc/apt/preferences.d/docker-ce-cli
+    content: |
+      Package: docker-ce-cli
+      Pin: version {{ version_docker }}
+      Pin-Priority: 1002
 
 - name: Pin the installed version of containerd
   copy:
     dest: /etc/apt/preferences.d/containerd
     content: |
-      Package: "containerd.io"
+      Package: containerd.io
       Pin: version {{version_containerd}}
       Pin-Priority: 1002
 
